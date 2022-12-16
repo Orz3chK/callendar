@@ -1,2 +1,22 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
+
+echo -e "Commit message validation started ..."
+validCommitRegex="^(TASK\-[0-9]+: |[Mm]erge)(.|\n)+$"
+printableValidCommitRegex="^(TASK\-[0-9]+: |[Mm]erge)(.|newline)+$"
+
+Red="\033[0;31m"
+Green="\033[0;32m"
+Color_Off="\033[0m"
+
+errorMessage="${Red}Commit message validation failed. \n\nCommit message in this project must adhere to this contract: \
+$printableValidCommitRegex\nYour commit will be rejected. You should change your message to a valid one and try again. \
+${Color_Off}\n\nExample: \"TASK-123: Commit message.\" or \"Merge ...\"\n"
+
+if ! grep -iqE "${validCommitRegex}" "$1"; then
+  echo -e "${errorMessage}" >&2
+  exit 1
+fi
+
+echo -e "${Green}Commit message validation passed.${Color_Off}"
+exit 0
