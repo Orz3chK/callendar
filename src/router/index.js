@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import UserLogin from "../pages/auth/UserLogin.vue";
 import NotFound from "../pages/NotFound.vue";
 
 const routes = [
@@ -17,6 +18,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+  { path: "/login", component: UserLogin },
   { path: "/:notFound(.*)", component: NotFound },
 ];
 
