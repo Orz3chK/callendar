@@ -1,8 +1,13 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import BaseCard from ".//ui/BaseCard.vue";
+import RelativeContainer from "./ui/RelativeContainer.vue";
+import JustButton from "./ui/JustButton.vue";
 
-createApp(App).use(router).mount("#app");
+const app = createApp(App);
 
-App.component("base-card", BaseCard);
+app.use(router);
+app.mount("#app");
+
+app.component("relative-container", RelativeContainer);
+app.component("just-button", JustButton);
